@@ -1,4 +1,4 @@
-import './game.css'
+import '../assets/game.css'
 export function generateInputElements(pregunta, answerUser, size, blocknum) {
     return pregunta.map((number, index) => {
         if (size == '1') {

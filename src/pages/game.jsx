@@ -5,15 +5,15 @@ import { authTypes } from "../types/authTypes";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle, faMap } from '@fortawesome/free-regular-svg-icons';
 import { fetchMethods } from "../components/FetchMethods";
-import { generateInputElements } from './Card';
-import { openModal, closeModal } from "./ModalF";
-import Swal from 'sweetalert2';
-import './game.css'
-import ea from "./C2.png"
-import d from "./m1.png"
-import m from "./d.png"
-import tablaM from "./Tablas_de_multiplicar.png"
-import { Countdown } from "./Countdown";
+import { generateInputElements } from '../components/Card';
+import { openModal, closeModal } from "../components/ModalF";
+import { message } from "../components/Message";
+import '../assets/game.css'
+import ea from "../assets/C2.png"
+import d from "../assets/m1.png"
+import m from "../assets/d.png"
+import tablaM from "../assets/Tablas_de_multiplicar.png"
+import { Countdown } from "../components/Countdown";
 const Game = () => {
     const navigate = useNavigate();
     const { dispatch } = useContext(AuthContext);
@@ -42,15 +42,6 @@ const Game = () => {
         navigate('/loginGame')
         dispatch({ type: authTypes.logout })
 
-    }
-    const message = (message, icon, time) => {
-        Swal.fire({
-            position: 'top-center',
-            icon: icon,
-            title: message,
-            showConfirmButton: false,
-            timer: time
-        });
     }
     const getListUser = () => {
         setTeams(log.teams);
@@ -126,42 +117,38 @@ const Game = () => {
         </div>)
     })
     const initGame = (res, colorButton, level) => {
-        const pregunta = res.data.incremento.Pregunta;
-        const respuesta = res.data.incremento.Respuesta;
-        setAnswer(respuesta.split(","));
-        setPregunta(pregunta.split(","));
-        setAnswerUser(pregunta.split(","));
-        setSize(res.data.incremento.Tamanio);
-        setCsSize(`s-${res.data.incremento.Tamanio}`);
-        setCBSize(`b-${res.data.incremento.Tamanio}`);
-        openModal('exampleModal', setShowBackdrop);
-        setRefresh(true);
-        setLevel(level);
-        setButtonColor(colorButton);
+        if (res.data.finish) {
+            const pregunta = res.data.incremento.Pregunta;
+            const respuesta = res.data.incremento.Respuesta;
+            setAnswer(respuesta.split(","));
+            setPregunta(pregunta.split(","));
+            setAnswerUser(pregunta.split(","));
+            setSize(res.data.incremento.Tamanio);
+            setCsSize(`s-${res.data.incremento.Tamanio}`);
+            setCBSize(`b-${res.data.incremento.Tamanio}`);
+            openModal('exampleModal', setShowBackdrop);
+            setRefresh(true);
+            setLevel(level);
+            setButtonColor(colorButton);
+
+        } else {
+            message('Ya has completado el nivel', "success", 1500);
+        }
+
 
     }
     const levelM = () => {
         fetchMethods.getFetch(`game/2`).then((res) => {
-            if (res.data.finish) {
-                initGame(res, 'fadeIn fourth button-blue', m);
-                setLevelPoint(2);
-
-            } else {
-                message('Ya has completado el nivel', "success", 1500);
-
-            }
+            initGame(res, 'fadeIn fourth button-blue', m);
+            setLevelPoint(2);
         });
 
 
     }
     const levelExp = () => {
         fetchMethods.getFetch(`game/3`).then((res) => {
-            if (res.data.finish) {
-                initGame(res, "fadeIn fourth button-orange", d);
-                setLevelPoint(3);
-            } else {
-                message('Ya haz completado el nivel', "success", 1500);
-            }
+            initGame(res, "fadeIn fourth button-orange", d);
+            setLevelPoint(3);
 
         });
 
@@ -169,14 +156,8 @@ const Game = () => {
     }
     const levelEa = () => {
         fetchMethods.getFetch(`game/1`).then((res) => {
-            if (res.data.finish) {
-                initGame(res, "fadeIn fourth button-yellow", ea);
-                setLevelPoint(1);
-
-            } else {
-                message('Ya has completado el nivel', "success", 1500);
-            }
-
+            initGame(res, "fadeIn fourth button-yellow", ea);
+            setLevelPoint(1);
         });
 
 
@@ -235,8 +216,6 @@ const Game = () => {
 
         } else {
             message('Casi lo logras, sigue prácticando.', "'error'", 1500);
-
-
             setTimeout(() => {
                 nextPlayer();
             }, 1500);
@@ -258,8 +237,6 @@ const Game = () => {
             getlostPoint();
             openModal('exampleModalToggle2', setShowBackdrop);
         }, 1200);
-
-
     }
     return (
         <>

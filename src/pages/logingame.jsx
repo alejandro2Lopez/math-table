@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import './logingame.css'
+import '../assets/logingame.css'
 import { useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { authTypes } from "../types/authTypes";
-import Swal from 'sweetalert2';
+import { message } from "../components/Message";
 const LoginGame = () => {
     const navigate = useNavigate();
     const { dispatch } = useContext(AuthContext);
@@ -11,27 +11,14 @@ const LoginGame = () => {
     const addTeam = () => {
         const input = document.getElementById("login")
         team.push({ name: input.value, points: 0 })
-        Swal.fire({
-            position: 'top-center',
-            icon: 'success',
-            title: `El equipo ${input.value} se ha agregado de manera correcta.`,
-            showConfirmButton: false,
-            timer: 3000
-        });
-        console.log(team);
+        message(`El equipo ${input.value} se ha agregado de manera correcta.`, 'success', 3000);
     }
     const goToTheGame = () => {
         if (team.length > 0) {
             navigate('/Game')
             dispatch({ type: authTypes.login, teams: team })
-        }else{
-            Swal.fire({
-                position: 'top-center',
-                icon: 'question',
-                title: 'Debes agregar almenos un jugador.',
-                showConfirmButton: false,
-                timer: 1500
-            });
+        } else {
+            message('Debes agregar almenos un jugador.', 'question', 1500);
         }
 
 
@@ -65,7 +52,6 @@ const LoginGame = () => {
                             />
 
                             <input type="button" className="fadeIn fourth button-yellow" onClick={addTeam} defaultValue="      Agregar     " />
-
                             <input type="button" className="fadeIn fourth button-blue" onClick={goToTheGame} defaultValue="        Jugar        " />
                             <input type="button" className="fadeIn fourth button-orange" defaultValue="Instrucciones" />
                             <div>
