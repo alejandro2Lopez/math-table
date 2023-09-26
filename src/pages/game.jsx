@@ -245,7 +245,7 @@ const Game = () => {
                 <div class="container p">
 
                     <div class="row justify-content-center align-items-center ">
-                        <div className="row gy-1">
+                        <div className="row gy-1" style={{ paddingTop: '225px', position: 'absolute', paddingLeft: '225px' }} >
 
                             {ListOfTeams}
                         </div>
@@ -267,18 +267,11 @@ const Game = () => {
 
                                 <h2 className="active"> Math Tables </h2>
                                 {/* Icon */}
-                                <div className="fadeIn first">
-                                    <img
-                                        src=""
-                                        className=""
-                                        alt=""
-
-                                    />
-                                </div>
+                              
                                 {/* Login Form */}
                                 <form>
                                     <h3>Turno del equipo: {log.teams[(nextPl == null) ? 0 : nextPl].name}</h3>
-
+                                    <hr></hr>
                                     <input type="button" className="fadeIn fourth button-yellow" onClick={levelEa} defaultValue="   Nivel Fácil   " />
                                     <input type="button" className="fadeIn fourth button-blue" onClick={levelM} defaultValue="  Nivel Medio  " />
                                     <input type="button" className="fadeIn fourth button-orange" onClick={levelExp} defaultValue="Nivel Experto" />

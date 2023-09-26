@@ -36,9 +36,10 @@ const LoginGame = () => {
                         {/* Icon */}
                         <div className="fadeIn first">
                             <img
-                                src=''
-                                id="icon"
-                                alt="User Icon"
+                                src=""
+                                className=""
+                                alt=""
+
                             />
                         </div>
                         {/* Login Form */}
