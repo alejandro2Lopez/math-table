@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useCallback } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { authTypes } from "../types/authTypes";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle, faMap } from '@fortawesome/free-regular-svg-icons';
-import { getFetch} from "../components/FetchMethods";
+import { getFetch } from "../components/FetchMethods";
 import { generateInputElements } from '../components/Card';
 import { openModal, closeModal } from "../components/ModalF";
 import { message } from "../components/Message";
@@ -43,9 +43,9 @@ const Game = () => {
         dispatch({ type: authTypes.logout })
 
     }
-    const getListUser = () => {
+   const getListUser = useCallback(() => {
         setTeams(log.teams);
-    }
+      }, [ log.teams]); 
     const setTeam = () => {
         setNextPlayer(1);
 
@@ -95,8 +95,8 @@ const Game = () => {
         }
 
 
-
-    }, [refresh, pregunta, closeModal, nextplayer])
+// eslint-disable-next-line
+    }, [refresh, pregunta, nextplayer, blocknum, getListUser, getUsers, log.teams])
 
 
     const levelOne = generateInputElements(pregunta, answerUser, size, blocknum);
@@ -146,7 +146,7 @@ const Game = () => {
 
     }
     const levelExp = () => {
-       getFetch(`game/3`).then((res) => {
+        getFetch(`game/3`).then((res) => {
             initGame(res, "fadeIn fourth button-orange", d);
             setLevelPoint(3);
 
@@ -204,11 +204,11 @@ const Game = () => {
             closeModal("exampleModal", setShowBackdrop);
             setTimeout(() => {
                 nextPlayer();
-                if (levelPoint == 1) {
+                if (levelPoint === 1) {
                     getPoint(3);
-                } else if (levelPoint == 2) {
+                } else if (levelPoint === 2) {
                     getPoint(5);
-                } else if (levelPoint == 3) {
+                } else if (levelPoint === 3) {
                     getPoint(7);
                 }
             }, 1500);
@@ -267,7 +267,7 @@ const Game = () => {
 
                                 <h2 className="active"> Math Tables </h2>
                                 {/* Icon */}
-                              
+
                                 {/* Login Form */}
                                 <form>
                                     <h3>Turno del equipo: {log.teams[(nextPl == null) ? 0 : nextPl].name}</h3>
