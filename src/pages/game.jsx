@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { authTypes } from "../types/authTypes";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkCircle, faMap } from '@fortawesome/free-regular-svg-icons';
-import { fetchMethods } from "../components/FetchMethods";
+import { getFetch} from "../components/FetchMethods";
 import { generateInputElements } from '../components/Card';
 import { openModal, closeModal } from "../components/ModalF";
 import { message } from "../components/Message";
@@ -138,7 +138,7 @@ const Game = () => {
 
     }
     const levelM = () => {
-        fetchMethods.getFetch(`game/2`).then((res) => {
+        getFetch(`game/2`).then((res) => {
             initGame(res, 'fadeIn fourth button-blue', m);
             setLevelPoint(2);
         });
@@ -146,7 +146,7 @@ const Game = () => {
 
     }
     const levelExp = () => {
-        fetchMethods.getFetch(`game/3`).then((res) => {
+       getFetch(`game/3`).then((res) => {
             initGame(res, "fadeIn fourth button-orange", d);
             setLevelPoint(3);
 
@@ -155,7 +155,7 @@ const Game = () => {
 
     }
     const levelEa = () => {
-        fetchMethods.getFetch(`game/1`).then((res) => {
+        getFetch(`game/1`).then((res) => {
             initGame(res, "fadeIn fourth button-yellow", ea);
             setLevelPoint(1);
         });
