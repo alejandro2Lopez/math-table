@@ -35,7 +35,7 @@ const Game = () => {
     const [nextPl, setNextPl] = useState(0)
     const { log } = useContext(AuthContext);
     const [levelPoint, setLevelPoint] = useState(0);
-    const [colors, setColors] = useState(['red', 'green', 'black', 'yellow', 'pink', 'grey']);
+    const [colors] = useState(['red', 'green', 'black', 'yellow', 'pink', 'grey']);
 
 
     const goToTheLogin = () => {

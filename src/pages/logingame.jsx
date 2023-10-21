@@ -7,7 +7,7 @@ import { message } from "../components/Message";
 const LoginGame = () => {
     const navigate = useNavigate();
     const { dispatch } = useContext(AuthContext);
-    const [team, setTeam] = useState([]);
+    const [team] = useState([]);
     const addTeam = () => {
         const input = document.getElementById("login")
         team.push({ name: input.value, points: 0 })
