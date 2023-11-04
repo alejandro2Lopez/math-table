@@ -7,7 +7,7 @@ export function generateInputElements(pregunta, answerUser, size, blocknum) {
                     <div className="d-grid gap-1">
                         <input
                             id={index}
-                            type="number"
+                   
                             className="mi-input"
                             placeholder={number}
                             onChange={(e) => { answerUser[index] = e.target.value }}
@@ -20,7 +20,7 @@ export function generateInputElements(pregunta, answerUser, size, blocknum) {
             if (index === 0 || index === 3) {
                 return (<><div className="col-1"  >
                     <div className="d-grid gap-1 ">
-                        <input type="number" className="mi-input" placeholder={number} onChange={(e) => { answerUser[index] = e.target.value }} readOnly={number !== '0' || blocknum === true}></input>
+                        <input  className="mi-input" placeholder={number} onChange={(e) => { answerUser[index] = e.target.value }} readOnly={number !== '0' || blocknum === true}></input>
 
 
                     </div>
@@ -31,7 +31,7 @@ export function generateInputElements(pregunta, answerUser, size, blocknum) {
             } if (index === 1 || index === 4) {
                 return (<> <div className="col-1">
                     <div className="d-grid gap-1 ">
-                        <input type="number" className="mi-input" placeholder={number} onChange={(e) => { answerUser[index] = e.target.value }} readOnly={number !== '0' || blocknum === true} ></input>
+                        <input  className="mi-input" placeholder={number} onChange={(e) => { answerUser[index] = e.target.value }} readOnly={number !== '0' || blocknum === true} ></input>
                     </div>
                 </div></>)
 
@@ -39,7 +39,7 @@ export function generateInputElements(pregunta, answerUser, size, blocknum) {
             } if (index === 2 || index === 5) {
                 return (<> <div className="col-1">
                     <div className="d-grid gap-1 ">
-                        <input type="number" className="mi-input" placeholder={number} onChange={(e) => { answerUser[index] = e.target.value }} readOnly={number !== '0' || blocknum === true}></input>
+                        <input  className="mi-input" placeholder={number} onChange={(e) => { answerUser[index] = e.target.value }} readOnly={number !== '0' || blocknum === true}></input>
                     </div>
                 </div>
                     <div></div></>)
@@ -62,7 +62,7 @@ export function generateInputElements(pregunta, answerUser, size, blocknum) {
             } if (index === 1 || index === 3) {
                 return (<> <div className="col-1">
                     <div className="d-grid gap-1 ">
-                        <input type="number" className="mi-input" placeholder={number} onChange={(e) => { answerUser[index] = e.target.value }} readOnly={number !== '0' || blocknum === true}></input>
+                        <input  className="mi-input" placeholder={number} onChange={(e) => { answerUser[index] = e.target.value }} readOnly={number !== '0' || blocknum === true}></input>
                     </div>
                 </div>
                     <div></div></>)

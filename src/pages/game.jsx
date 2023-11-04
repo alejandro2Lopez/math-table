@@ -38,7 +38,7 @@ const Game = () => {
     const [colors] = useState(['red', 'green', 'black', 'yellow', 'pink', 'grey']);
     const [levelEasy, setLevelEasy] = useState(2);
     const [levelMedium, setLevelMedium] = useState(2);
-    const [levelExpert, setLevelExpert] = useState(2);
+    const [levelExpert, setLevelExpert] = useState(10);
 
     const goToTheLogin = () => {
         navigate('/loginGame')
