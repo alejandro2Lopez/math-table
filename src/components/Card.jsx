@@ -1,7 +1,7 @@
 import '../assets/game.css'
 export function generateInputElements(pregunta, answerUser, size, blocknum) {
     return pregunta.map((number, index) => {
-        if (size === '1') {
+        if (size === 1) {
             return (<div className="row gy-1" key={number}>
                 <div className="col-1">
                     <div className="d-grid gap-1">
@@ -16,7 +16,7 @@ export function generateInputElements(pregunta, answerUser, size, blocknum) {
                     </div>
                 </div>
             </div>)
-        } else if (size === '3') {
+        } else if (size === 3) {
             if (index === 0 || index === 3) {
                 return (<><div className="col-1"  >
                     <div className="d-grid gap-1 ">

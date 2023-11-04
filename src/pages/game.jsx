@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState,useCallback } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { authTypes } from "../types/authTypes";
@@ -36,16 +36,18 @@ const Game = () => {
     const { log } = useContext(AuthContext);
     const [levelPoint, setLevelPoint] = useState(0);
     const [colors] = useState(['red', 'green', 'black', 'yellow', 'pink', 'grey']);
-
+    const [levelEasy, setLevelEasy] = useState(2);
+    const [levelMedium, setLevelMedium] = useState(2);
+    const [levelExpert, setLevelExpert] = useState(2);
 
     const goToTheLogin = () => {
         navigate('/loginGame')
         dispatch({ type: authTypes.logout })
 
     }
-   const getListUser = useCallback(() => {
+    const getListUser = useCallback(() => {
         setTeams(log.teams);
-      }, [ log.teams]); 
+    }, [log.teams]);
     const setTeam = () => {
         setNextPlayer(1);
 
@@ -95,7 +97,7 @@ const Game = () => {
         }
 
 
-// eslint-disable-next-line
+        // eslint-disable-next-line
     }, [refresh, pregunta, nextplayer, blocknum, getListUser, getUsers, log.teams])
 
 
@@ -116,16 +118,16 @@ const Game = () => {
             </div>
         </div>)
     })
-    const initGame = (res, colorButton, level) => {
-        if (res.data.finish) {
-            const pregunta = res.data.incremento.Pregunta;
-            const respuesta = res.data.incremento.Respuesta;
+    const initGame = (res, colorButton, level, finish) => {
+        if (finish < 20) {
+            const pregunta = res.pregunta;
+            const respuesta = res.respuesta;
             setAnswer(respuesta.split(","));
             setPregunta(pregunta.split(","));
             setAnswerUser(pregunta.split(","));
-            setSize(res.data.incremento.Tamanio);
-            setCsSize(`s-${res.data.incremento.Tamanio}`);
-            setCBSize(`b-${res.data.incremento.Tamanio}`);
+            setSize(res.tamanio);
+            setCsSize(`s-${res.tamanio}`);
+            setCBSize(`b-${res.tamanio}`);
             openModal('exampleModal', setShowBackdrop);
             setRefresh(true);
             setLevel(level);
@@ -138,16 +140,24 @@ const Game = () => {
 
     }
     const levelM = () => {
-        getFetch(`game/2`).then((res) => {
-            initGame(res, 'fadeIn fourth button-blue', m);
+        const action = "LevelTwo";
+        const position = levelMedium;
+        setLevelMedium(levelMedium + 1);
+        getFetch(`action=${action}&position=${position}`).then((res) => {
+
+            initGame(res.data, 'fadeIn fourth button-blue', m, position);
             setLevelPoint(2);
         });
 
 
     }
     const levelExp = () => {
-        getFetch(`game/3`).then((res) => {
-            initGame(res, "fadeIn fourth button-orange", d);
+        const action = "LevelThree";
+        const position = levelExpert;
+        setLevelExpert(levelExpert + 1);
+        getFetch(`action=${action}&position=${position}`).then((res) => {
+            console.log(res.data)
+            initGame(res.data, "fadeIn fourth button-orange", d, position);
             setLevelPoint(3);
 
         });
@@ -155,8 +165,12 @@ const Game = () => {
 
     }
     const levelEa = () => {
-        getFetch(`game/1`).then((res) => {
-            initGame(res, "fadeIn fourth button-yellow", ea);
+        const action = "LevelOne";
+        const position = levelEasy;
+        setLevelEasy(levelEasy + 1)
+        getFetch(`action=${action}&position=${position}`).then((res) => {
+            console.log(res.data);
+            initGame(res.data, "fadeIn fourth button-yellow", ea, position);
             setLevelPoint(1);
         });
 
@@ -215,7 +229,7 @@ const Game = () => {
 
 
         } else {
-            message('Casi lo logras, sigue prácticando.', "'error'", 1500);
+            message('Casi lo logras, sigue prácticando.', "error", 1500);
             setTimeout(() => {
                 nextPlayer();
             }, 1500);
