@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 const PublicRouter = ({ children }) => {
   const { log } = useContext(AuthContext);
 
-  return !log.log ? children : <Navigate to="/loginGame" />;
+  return !log.log ? children : <Navigate to="/Game" />;
 };
 
 export default PublicRouter;
