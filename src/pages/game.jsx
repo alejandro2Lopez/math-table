@@ -12,6 +12,8 @@ import '../assets/game.css'
 import ea from "../assets/C2.png"
 import d from "../assets/m1.png"
 import m from "../assets/d.png"
+import logoCarga from "../assets/MathTable.png"
+
 import tablaM from "../assets/Tablas_de_multiplicar.png"
 import { Countdown } from "../components/Countdown";
 const Game = () => {
@@ -143,8 +145,11 @@ const Game = () => {
         const action = "LevelTwo";
         const position = levelMedium;
         setLevelMedium(levelMedium + 1);
-        getFetch(`action=${action}&position=${position}`).then((res) => {
+        var spinner = document.getElementById("spinner");
 
+        spinner.style.display = "";
+        getFetch(`action=${action}&position=${position}`).then((res) => {
+            spinner.style.display = "none";
             initGame(res.data, 'fadeIn fourth button-blue', m, position);
             setLevelPoint(2);
         });
@@ -155,8 +160,15 @@ const Game = () => {
         const action = "LevelThree";
         const position = levelExpert;
         setLevelExpert(levelExpert + 1);
+        var spinner = document.getElementById("spinner");
+
+        // Verificar si el elemento existe antes de intentar ocultarlo
+
+        // Ocultar el elemento cambiando su propiedad de estilo display
+        spinner.style.display = "";
         getFetch(`action=${action}&position=${position}`).then((res) => {
             console.log(res.data)
+            spinner.style.display = "none";
             initGame(res.data, "fadeIn fourth button-orange", d, position);
             setLevelPoint(3);
 
@@ -168,8 +180,11 @@ const Game = () => {
         const action = "LevelOne";
         const position = levelEasy;
         setLevelEasy(levelEasy + 1)
+        var spinner = document.getElementById("spinner");
+
+        spinner.style.display = "";
         getFetch(`action=${action}&position=${position}`).then((res) => {
-            console.log(res.data);
+            spinner.style.display = "none";
             initGame(res.data, "fadeIn fourth button-yellow", ea, position);
             setLevelPoint(1);
         });
@@ -296,7 +311,13 @@ const Game = () => {
                             </div>
                         </div>
                     </div>
+                    <div class="loader-container" id="spinner"  style={{ display: "none" }}>
+                        <div class="loader-logo">
 
+                            <img src={logoCarga} alt="Tu Logotipo" />
+                        </div>
+                        <div class="loader-overlay"></div>
+                    </div>
                 </div>
                 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered ">
