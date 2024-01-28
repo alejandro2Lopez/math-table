@@ -5,6 +5,8 @@ import { AuthContext } from "../context/AuthContext";
 import { authTypes } from "../types/authTypes";
 import { message } from "../components/Message";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleLeft } from '@fortawesome/free-regular-svg-icons';
 const LoginGame = () => {
     const navigate = useNavigate();
     const { dispatch } = useContext(AuthContext);
@@ -16,6 +18,7 @@ const LoginGame = () => {
         } else {
             team.push({ name: input.value, points: 0 })
             message(`El equipo ${input.value} se ha agregado de manera correcta.`, 'success', 3000);
+            input.value = "";
         }
 
     }
@@ -29,25 +32,30 @@ const LoginGame = () => {
 
 
     }
+    const goToTheMathLab = () => {
+        window.location.href = 'https://matlab-juegosu.onrender.com/';
+        dispatch({ type: authTypes.logout })
+
+    }
     return (
 
         <body className='block-scroll body'>
 
             <div className="py-8 h-200 wrapper fadeInDown ">
                 <div className="row justify-content-center align-items-center ">
+                    <div className="d-flex justify-content-start align-items-start">
+                        <button id="enviar" className='btn' onClick={goToTheMathLab} style={{ color: "white" }}>
+                            <FontAwesomeIcon icon={faArrowAltCircleLeft } size="2xl" color='White' />
+                        </button >
+
+                    </div>
                     <div className="row justify-content-center align-items-center  " id="formContent" >
-                        {/* Tabs Titles */}
+
                         <h2 className="active"> Math Tables </h2>
 
                         {/* Icon */}
-                        <div className="fadeIn first">
-                            <img
-                                src=""
-                                className=""
-                                alt=""
 
-                            />
-                        </div>
+
                         {/* Login Form */}
                         <form>
                             <input
@@ -77,7 +85,7 @@ const LoginGame = () => {
                         <div className="modal-header d-block">
                             <div className="text-center" style={{ textAlign: "center !important" }}>
                                 <h2 className="modal-title text-center" id="titleVerification">
-                                    &nbsp;Instrucciones
+                                    Instrucciones
                                 </h2>
                             </div>
                         </div>
@@ -110,7 +118,7 @@ const LoginGame = () => {
                                 </span>
                                 <br />
                                 <br />
-                          
+
                                 📝&nbsp;
                                 <strong>
                                     <span style={{ color: "rgb(55, 65, 81)" }}>
@@ -128,7 +136,7 @@ const LoginGame = () => {
                                 <span style={{ color: "rgb(55, 65, 81)" }}>:</span>
                                 <br />
                                 <br />
-                           
+
                                 🟢&nbsp;
                                 <strong>
                                     <span
@@ -176,7 +184,7 @@ const LoginGame = () => {
                                 </span>
                                 <br />
                                 <br />
-                             
+
                                 🟢&nbsp;
                                 <strong>
                                     <span style={{ color: "rgb(55, 65, 81)" }}>Nivel fácil:</span>
@@ -234,16 +242,16 @@ const LoginGame = () => {
                                 <span style={{ color: "rgb(55, 65, 81)" }}>.&nbsp;</span>☹️
                                 <br />
                                 <br />
-                            
-                          
+
+
                                 🏆 Ganará quien tenga más aciertos.&nbsp;
                                 <br />
-                      
-                            
+
+
                             </p>
                         </div>
                         <div className="modal-footer">
-                           
+
                             <button
                                 className="btn btn-primary"
                                 type="button"
@@ -253,7 +261,7 @@ const LoginGame = () => {
                                     borderColor: "rgb(255,107,24)"
                                 }}
                             >
-                            Cerrar
+                                Cerrar
                             </button>
                         </div>
                     </div>

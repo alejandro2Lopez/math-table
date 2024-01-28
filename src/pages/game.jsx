@@ -401,6 +401,8 @@ const Game = () => {
                     </div>
 
                 </div>
+           
+       
             </body >
 
         </>);
